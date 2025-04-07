@@ -16,10 +16,14 @@
         <div class="player" id="player-6">Jogador 6</div>
         <div class="player" id="player-7">Jogador 7</div>
         <div class="player" id="player-8">Jogador 8</div>
-        <div class="player" id="player-9">Jogador 9</div>
+        <!-- <div class="player" id="player-9">Jogador 9</div> -->
 
         <div class="center-table">
-            <div id="flop" class="card-area"></div>
+            <div class="flop">
+                <div id="flop1" class="card-area"></div>
+                <div id="flop2" class="card-area"></div>
+                <div id="flop3" class="card-area"></div>
+            </div>
             <div id="turn" class="card-area"></div>
             <div id="river" class="card-area"></div>
         </div>
@@ -27,7 +31,10 @@
         <div class="controls">
             <button id="dealBtn">Distribuir Cartas</button>
             <button id="betBtn">Fazer Aposta</button>
+            <button id="foldBtn">Desistir</button>
         </div>
+
+        <div class="pot-display">Pote: <span id="potAmount">0</span></div>
     </div>
 
     <script src="script.js"></script>
