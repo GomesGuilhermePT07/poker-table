@@ -6,7 +6,7 @@ function criarBaralho() {
 
     for (let naipe of naipes) {
         for (let valor of valores) {
-            baralho.push(`${valor}${naipe}`);
+            baralho.push({ valor: valor, naipe: naipe });
         }
     }
 
@@ -35,7 +35,13 @@ function distribuirCartas(baralho) {
 // Função para mostrar as cartas na mesa
 function mostrarCartasJogadores(jogadores) {
     for (let i = 0; i < jogadores.length; i++) {
-        document.getElementById(`player-${i + 1}`).innerText = jogadores[i].join(' | ');
+        const cartasJogador = jogadores[i];
+        const playerDiv = document.getElementById(`player-${i + 1}`);
+        
+        // Exibe apenas as cartas do jogador e não as dos outros
+        playerDiv.innerHTML = `
+            ${cartasJogador.map(carta => `<span class="${carta.naipe === '♥' || carta.naipe === '♦' ? 'red-card' : 'black-card'}">${carta.valor}${carta.naipe}</span>`).join('<br>')}
+        `;
     }
 }
 
@@ -45,9 +51,9 @@ function mostrarCartasComunitarias(cartas) {
     const turnArea = document.getElementById('turn');
     const riverArea = document.getElementById('river');
 
-    flopArea.innerText = cartas.flop.join(' | ');
-    turnArea.innerText = cartas.turn;
-    riverArea.innerText = cartas.river;
+    flopArea.innerHTML = cartas.flop.map(carta => `<span class="${carta.naipe === '♥' || carta.naipe === '♦' ? 'red-card' : 'black-card'}">${carta.valor}${carta.naipe}</span>`).join('<br>');
+    turnArea.innerHTML = `<span class="${cartas.turn.naipe === '♥' || cartas.turn.naipe === '♦' ? 'red-card' : 'black-card'}">${cartas.turn.valor}${cartas.turn.naipe}</span>`;
+    riverArea.innerHTML = `<span class="${cartas.river.naipe === '♥' || cartas.river.naipe === '♦' ? 'red-card' : 'black-card'}">${cartas.river.valor}${cartas.river.naipe}</span>`;
 }
 
 // Função que lida com a distribuição das cartas e aposta
