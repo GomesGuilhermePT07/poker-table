@@ -3,40 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mesa de Poker - 9 Jogadores</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Mesa de Poker</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: green;
+            font-family: Arial, sans-serif;
+        }
+
+        .mesa {
+            width: 900px;
+            height: 500px;
+            background-color: darkgreen;
+            border: 10px solid #654321;
+            border-radius: 50%;
+            position: relative;
+            margin: 50px auto;
+        }
+
+        .jogador {
+            width: 100px;
+            height: 50px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px;
+            position: absolute;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .centro {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+        }
+
+        .cartas-centro {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .carta {
+            width: 50px;
+            height: 70px;
+            background-color: white;
+            border: 1px solid black;
+            display: flex; 
+            border-radius: 5px;
+            position: relative;
+            padding: 4px;
+            font-size: 12px;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .carta .valor {
+            align-self: flex-start;
+            font-weight: bold;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 16px;
+        }
+
+        .carta .naipe {
+            align-self: flex-end;
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            font-size: 14px;
+        }
+
+        .carta-verso {
+            width: 50px;
+            height: 70px;
+            background: repeating-linear-gradient(
+                45deg,
+                #007bff,
+                #007bff 4px,
+                #ffffff 4px,
+                #ffffff 8px
+            );
+            border: 1px solid #000;
+            border-radius: 5px;
+            margin: 0 4px;
+        }
+
+        .cartas-jogador .carta {
+            margin: 0 4px;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: left;
+            padding: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .botoes {
+            margin-top: 20px;
+        }
+
+        .botoes button {
+            margin: 0 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+
+        .pote {
+            position: absolute;
+            top: 130px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            padding: 8px 20px;
+            border-radius: 10px;
+            border: 2px solid black;
+            font-weight: bold;
+        }
+
+        .fichas {
+            font-size: 14px;
+            margin-top: 4px;
+            color: black;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+        }
+
+    </style>
 </head>
 <body>
-    <div class="table">
-        <div class="player" id="player-1">Jogador 1</div>
-        <div class="player" id="player-2">Jogador 2</div>
-        <div class="player" id="player-3">Jogador 3</div>
-        <div class="player" id="player-4">Jogador 4</div>
-        <div class="player" id="player-5">Jogador 5</div>
-        <div class="player" id="player-6">Jogador 6</div>
-        <div class="player" id="player-7">Jogador 7</div>
-        <div class="player" id="player-8">Jogador 8</div>
-        <!-- <div class="player" id="player-9">Jogador 9</div> -->
+    <div class="mesa">
+        <div class="pote">Pote: 0€</div>
 
-        <div class="center-table">
-            <div class="flop">
-                <div id="flop1" class="card-area"></div>
-                <div id="flop2" class="card-area"></div>
-                <div id="flop3" class="card-area"></div>
+        <!-- Jogadores -->
+        <div class="jogador" style="top: 10px; left: 45%; transform: translateY(-90%);">
+            Jogador 1
+            <div class="fichas">1000🎲</div>           
+        </div>
+        <div class="jogador" style="top: 80px; right: 10px;">
+            Jogador 2
+            <div class="fichas">1000🎲</div>
+        </div>
+        <div class="jogador" style="top: 220px; right: -100px;">
+            Jogador 3
+            <div class="fichas">1000🎲</div>
+        </div>
+        <div class="jogador" style="bottom: 80px; right: 10px;">
+            Jogador 4
+            <div class="fichas">1000🎲</div>
+        </div>
+        <div class="jogador" style="bottom: 10px; left: 45%; transform: translateY(90%);">
+            Jogador 5
+            <div class="fichas">1000🎲</div>
+        </div>
+        <div class="jogador" style="bottom: 80px; left: 10px;">
+            Jogador 6
+            <div class="fichas">1000🎲</div>
+        </div>
+        <div class="jogador" style="top: 220px; left: -100px;">
+            Jogador 7
+            <div class="fichas">1000🎲</div>
+        </div>
+        <div class="jogador" style="top: 80px; left: 10px;">
+            Jogador 8
+            <div class="fichas">1000🎲</div>
+        </div>
+
+        <!-- Cartas ao centro -->
+        <div class="centro">
+            <div>Flop, Turn, River</div>
+            <div class="cartas-centro">
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
+                <div class="carta"></div>
             </div>
-            <div id="turn" class="card-area"></div>
-            <div id="river" class="card-area"></div>
-        </div>
 
-        <div class="controls">
-            <button id="dealBtn">Distribuir Cartas</button>
-            <button id="betBtn">Fazer Aposta</button>
-            <button id="foldBtn">Desistir</button>
+            <!-- Botões -->
+            <div class="botoes">
+                <button onclick="distribuirCartas()">Distribuir Cartas</button>
+                <button onclick="fazerAposta()">Fazer Aposta</button>
+                <button onclick="desistir()">Desistir</button>
+            </div>
         </div>
-
-        <div class="pot-display">Pote: <span id="potAmount">0</span></div>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        let cartasJogadores = [];
+        let cartasDeck = [
+            '2♥', '2♦', '2♠', '2♣', '3♥', '3♦', '3♠', '3♣', '4♥', '4♦', '4♠', '4♣',
+            '5♥', '5♦', '5♠', '5♣', '6♥', '6♦', '6♠', '6♣', '7♥', '7♦', '7♠', '7♣',
+            '8♥', '8♦', '8♠', '8♣', '9♥', '9♦', '9♠', '9♣', '10♥', '10♦', '10♠', '10♣',
+            'J♥', 'J♦', 'J♠', 'J♣', 'Q♥', 'Q♦', 'Q♠', 'Q♣', 'K♥', 'K♦', 'K♠', 'K♣',
+            'A♥', 'A♦', 'A♠', 'A♣'
+        ];
+
+        let fichasPorJogador = new Array(8).fill(1000); // 8 jogadores, 1000 fichas cada
+
+        function atualizarFichasUI() {
+            const jogadores = document.querySelectorAll('.jogador');
+            jogadores.forEach((jogador, i) => {
+                const fichasDiv = jogador.querySelector('.fichas');
+                if (fichasDiv) {
+                    fichasDiv.textContent = `${fichasPorJogador[i]}🎲`;
+                }
+            });
+        }
+    
+        function distribuirCartas() {
+            // Embaralhar deck
+            cartasDeck = cartasDeck.sort(() => Math.random() - 0.5);
+
+            // Remover cartas anteriores de todos os jogadores
+            document.querySelectorAll('.cartas-jogador').forEach(el => el.remove());
+
+            const jogadores = document.querySelectorAll('.jogador');
+
+            // Distribuir cartas
+            for (let i = 0; i < jogadores.length; i++) {
+                let cartas = [cartasDeck.pop(), cartasDeck.pop()];
+
+                let cartasDiv = document.createElement('div');
+                cartasDiv.classList.add('cartas-jogador');
+                cartasDiv.style.display = 'flex';
+                cartasDiv.style.justifyContent = 'center';
+                cartasDiv.style.marginTop = '5px';
+
+                if (i === 0) {
+                    // Jogador 1 (humano) — cartas viradas para cima
+                    cartas.forEach(carta => {
+                        let cartaDiv = document.createElement('div');
+                        cartaDiv.classList.add('carta');
+                        cartaDiv.innerHTML = `
+                            <div class="valor">${carta.slice(0, -1)}</div>
+                            <div class="naipe">${carta.slice(-1)}</div>
+                        `;
+                        cartasDiv.appendChild(cartaDiv);
+                    });
+                } else {
+                    // Outros jogadores — verso da carta
+                    for (let j = 0; j < 2; j++) {
+                        let cartaDiv = document.createElement('div');
+                        cartaDiv.classList.add('carta-verso');
+                        cartasDiv.appendChild(cartaDiv);
+                    }
+                }
+
+                jogadores[i].appendChild(cartasDiv);
+            }
+
+            alert("As cartas foram distribuídas!");
+        }
+    
+        function fazerAposta() {
+            const aposta = 50;
+            if (fichasPorJogador[0] >= aposta) {
+                fichasPorJogador[0] -= aposta;
+
+                // Atualizar pote
+                let poteDiv = document.querySelector('.pote');
+                let valorAtual = parseInt(poteDiv.textContent.replace(/\D/g, ""));
+                valorAtual += aposta;
+                poteDiv.textContent = `Pote: ${valorAtual}€`;
+
+                atualizarFichasUI();
+                alert('Aposta feita!');
+            } else {
+                alert('Fichas insuficientes!');
+            }
+        }
+
+    
+        function desistir() {
+            alert('Jogador desistiu!');
+        }
+    </script>    
 </body>
 </html>
