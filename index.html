@@ -264,6 +264,7 @@
             });
         }
 
+        // Função para distribuir as cartas para cada jogador
         function distribuirCartas() {
             cartasDeck = cartasDeck.sort(() => Math.random() - 0.5);
             document.querySelectorAll('.cartas-jogador').forEach(el => el.remove());
